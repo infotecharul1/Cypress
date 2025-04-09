@@ -8,23 +8,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        name: Cypress Tests
 
-on: push
-
-jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: actions/checkout
-        uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-        node-version: '18'
-      - name: Run all cypress tests
-        run: npx cypress run
+          node-version: "22"
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run all Cypress tests
+        run: npx cypress run
